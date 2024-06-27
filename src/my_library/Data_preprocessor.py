@@ -2,7 +2,7 @@ import os
 import sys
 import pickle
 import numpy as np
-import count_statistics as counter 
+import my_library.count_statistics as counter 
 
 class DataPreprocessor:
     def __init__(self, sentence_arrays, dictionary):
@@ -35,6 +35,7 @@ class DataPreprocessor:
         X_list, y_list = [], []
         for i in range(len(self.sentence_arrays)):
             sentence = self.sentence_arrays[i][0]  # Sentenceの列を取得
+            print(sentence)
             count_vector = counter.count_and_vectorize(self.dictionary, sentence)
             X_list.append(count_vector)
             if self.sentence_arrays[i][4] == "0":  # Writer_Joyの列が"0"なら負例とする 
