@@ -9,13 +9,15 @@ pyarrow
 tqdm
 
 janome
-torch
-torchtext
 ginza
 ja_ginza
-nagisa
+nagisa # Windowsだと上手く行かないかも。WSL推奨
 
 # development
 flake8
 black
 flake8-bugbear
+
+--index-url https://download.pytorch.org/whl/cpu
+torch
+torchtext
