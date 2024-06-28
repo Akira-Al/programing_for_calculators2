@@ -6,8 +6,8 @@ sys.path.append(project_root_path)
 
 import my_library.Trainer as Trainer
 
-preprocessed_train_data_path = input()
-model_dump_path_base = input()
+preprocessed_train_data_path = input("Enter the path for the preprocessed train data: ")
+model_dump_path_base = input("Enter the path to save the model: ")
 
 trainer = Trainer.Trainer()
 X, y = trainer.load_data(preprocessed_train_data_path)
