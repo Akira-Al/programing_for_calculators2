@@ -1,0 +1,21 @@
+numpy
+matplotlib
+pandas
+scikit-learn
+scipy
+jupyterlab
+ipython
+pyarrow
+tqdm
+
+janome
+torch
+torchtext
+ginza
+ja_ginza
+nagisa
+
+# development
+flake8
+black
+flake8-bugbear
