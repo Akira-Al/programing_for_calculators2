@@ -27,7 +27,7 @@ else:
 
 # dictionary = dictionary_loader.load(dictionary_path)
 if is_test == "Y":
-    sentence_arrays = input_sentence
+    sentence_arrays = [input_sentence]
     data_preprocessor = DataPreprocessor(sentence_arrays)
     data_preprocessor.preprocess_data(True)
 elif labeled == "Y":

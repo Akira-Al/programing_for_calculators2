@@ -24,8 +24,8 @@ def count_and_vectorize(sent):
     num_negative = 0
     num_neutral = 0
     # 辞書の読み込み
-    dict1 = dictionary_loader.load("../data/dictionary1.txt")
-    dict2 = dictionary_loader.load("../data/dictionary2.txt")
+    dict1 = dictionary_loader.load_dict1()
+    dict2 = dictionary_loader.load_dict2()
     # 1文を形態素解析してwordsリストに格納
     # token.base_formの型らしい
     words = []
@@ -35,40 +35,37 @@ def count_and_vectorize(sent):
     polarity = [ 0. for i in range(len(words)) ]
     for i in range(len(words)):
         # dictionary1.txt
-        if words[i][0] in dict1:
+        if words[i] in dict1:
             polarity[i] = dict1[words[i]][0]
-            break
         # dictionary2.txt
-        if words[i][0] in dict2:
-            for record in dict2[words[i][0]]:
-                if words[i] == record[0]:
+        if words[i] in dict2:
+            for record in dict2[words[i]]:
+                if [words[i]] == record[0]:
                     polarity[i] = record[1]
-                    break
             # もしこの時点で一致するものがない場合、カタカナをひらがなに変換して確認
-            if polarity[i] == 0:
-                if KATAKANA_PAT.fullmatch(words[i]) is not None:
-                    # hira_token = words[i]
-                    hira_token = jaconv.kata2hira(words[i])
-                    for record in dict2[hira_token[0]]:
-                        if hira_token == record[0]:
-                            polarity[i] = record[1]
-                            break
+        if polarity[i] == 0.:
+            if KATAKANA_PAT.fullmatch(words[i]) is not None:
+                # hira_token = words[i]
+                hira_token = jaconv.kata2hira(words[i])
+                for record in dict2[hira_token]:
+                    if [hira_token] == record[0]:
+                        polarity[i] = record[1]
         # 否定の処理
         # あとで"助動詞"も条件に足す
-        if words[i][0] in ["ない", "ぬ", "ん"] and i > 0:
-            polarity[i-1] *= -1
+        if words[i] in ["ない", "ぬ", "ん"] and i > 0:
+            polarity[i-1] *= -1.
         # 接続詞の処理
         # あとで"接続詞"or"助詞"も条件に足す
-        if words[i][0] in ["しかし", "けど", "ただ", "だが", "しかしながら", "けれど", "けれども", "だけど", "だけども", "そうではあるが", "それでも", "でも", "ではあるが", "にもかかわらず", "ところが", "ですが", "ものの", "しかるに", "とはいうものの", "のに", "なのに", "それなのに", "とはいえ", "そうはいうものの", "でも", "そのくせ"]:
+        if words[i] in ["しかし", "けど", "ただ", "だが", "しかしながら", "けれど", "けれども", "だけど", "だけども", "そうではあるが", "それでも", "でも", "ではあるが", "にもかかわらず", "ところが", "ですが", "ものの", "しかるに", "とはいうものの", "のに", "なのに", "それなのに", "とはいえ", "そうはいうものの", "でも", "そのくせ"]:
             for j in range(i):
-                polarity[j] *= -1
+                polarity[j] *= -0.5
         
     # 極性の数をカウント
     for i in range(len(polarity)):
         if polarity[i] > 0:
-            num_positive += 1
+            num_positive += polarity[i]
         elif polarity[i] < 0:
-            num_negative += 1
+            num_negative += polarity[i] * -1
         else:
             num_neutral += 1
     num_total = len(polarity)
