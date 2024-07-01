@@ -5,26 +5,26 @@ import numpy as np
 import my_library.count_statistics as counter 
 
 class DataPreprocessor:
-    def __init__(self, sentence_arrays, dictionary):
+    def __init__(self, sentence_arrays):
         """
         DataPreprocessorクラスのコンストラクタ
         Args:
             sentence_arrays (list of lists): 処理する文章の配列
-            dictionary (dict): 極性辞書         
         """
         self.sentence_arrays = sentence_arrays
-        self.dictionary = dictionary
         self.X = None
         self.y = None
 
-    def preprocess_data(self):
+    def preprocess_data(self, verbose=False):
         """
         data.txtのデータ形式を前提に前処理を行う
         """
         X_list = []
         for i in range(len(self.sentence_arrays)):
             sentence = self.sentence_arrays[i]     # 配列の要素が文章であると想定
-            count_vector = counter.count_and_vectorize(self.dictionary, sentence)
+            count_vector = counter.count_and_vectorize( sentence)
+            if verbose:
+                print(sentence, count_vector)
             X_list.append(count_vector)
         self.X = np.array(X_list)                  # リストをnumpyの多次元配列に変換
 
@@ -36,7 +36,7 @@ class DataPreprocessor:
         for i in range(len(self.sentence_arrays)):
             sentence = self.sentence_arrays[i][0]  # Sentenceの列を取得
             print(sentence)
-            count_vector = counter.count_and_vectorize(self.dictionary, sentence)
+            count_vector = counter.count_and_vectorize(sentence)
             X_list.append(count_vector)
             if self.sentence_arrays[i][4] == "0":  # Writer_Joyの列が"0"なら負例とする 
                 y_list.append(-1)
