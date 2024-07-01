@@ -18,7 +18,8 @@ if is_test == "Y":
     preprocessed_data_path = ""
 else:
     data_path = input("Enter the path for the data file: ")
-    dictionary_path = input("Enter the path for the dictionary file: ")
+    # dictionary_path = input("Enter the path for the dictionary file: ")
+    dictionary_path = ""
     labeled = input("Enter if the data is labeled (Y/N): ")
     input_sentence = ""
 

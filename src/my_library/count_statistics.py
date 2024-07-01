@@ -47,9 +47,10 @@ def count_and_vectorize(sent):
             if KATAKANA_PAT.fullmatch(words[i]) is not None:
                 # hira_token = words[i]
                 hira_token = jaconv.kata2hira(words[i])
-                for record in dict2[hira_token]:
-                    if [hira_token] == record[0]:
-                        polarity[i] = record[1]
+                if hira_token in dict2:
+                    for record in dict2[hira_token]:
+                        if [hira_token] == record[0]:
+                            polarity[i] = record[1]
         # 否定の処理
         # あとで"助動詞"も条件に足す
         if words[i] in ["ない", "ぬ", "ん"] and i > 0:
