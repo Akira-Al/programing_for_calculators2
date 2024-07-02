@@ -17,6 +17,8 @@ class Validator:
         Returns:
             None
         """        
+        print("------------------")
+        print("load_data", file_path)
         with open(file_path, 'rb') as f:
             self.X, self.y = pickle.load(f)        
         return self.X, self.y
@@ -29,6 +31,7 @@ class Validator:
         Returns:
             None
         """        
+        print("load_model", file_path)
         with open(file_path, 'rb') as f:
             self.model = pickle.load(f)
     def evaluate_model(self):
@@ -39,6 +42,7 @@ class Validator:
             precision(float): 適合率
             recall(float): 再現率
         """        
+        print("evaluate_model")
         y_pred = self.model.predict(self.X)
         accuracy = metrics.accuracy_score(self.y, y_pred)
         precision = metrics.precision_score(self.y, y_pred)

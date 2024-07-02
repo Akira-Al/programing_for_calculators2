@@ -15,5 +15,6 @@ X, y = trainer.load_data(preprocessed_train_data_path)
 hyperparameters = [0.001, 0.01, 0.1, 1, 10, 100, 1000]
 for h in hyperparameters:
     model_dump_path = model_dump_path_base + str(h) + '.pkl'
+    print(f"hyperparameter: {h} X: {X} y: {y}")
     trainer.train_SVM(h, X, y)
     trainer.dump_model(model_dump_path)

@@ -19,6 +19,7 @@ class Trainer:
             X (numpy.ndarray): 前処理済みの訓練データ
             y (numpy.ndarray): ラベルデータ
         """        
+        print("load_data")
         with open(file_path, 'rb') as f:
             X, y = pickle.load(f)        
         return X, y
@@ -29,6 +30,7 @@ class Trainer:
         Args:
             file_path (str): モデルを保存するファイルパス
         """ 
+        print("dump_model")
         with open(file_path, 'wb') as f:
             pickle.dump(self.model, f)
 
@@ -40,6 +42,7 @@ class Trainer:
             X (numpy.ndarray): 前処理済みの訓練データ
             y (numpy.ndarray): ラベルデータ
         """     
+        print("train_SVM")
         self.model = SVM.SVC(C=hyperparameter)
         self.model.fit(X,y)
 
@@ -51,5 +54,6 @@ class Trainer:
             X (numpy.ndarray): 前処理済みの訓練データ
             y (numpy.ndarray): ラベルデータ
         """     
+        print("train_RF")
         self.model = Ensemble.RandomForestClassifier(max_depth=hyperparameter)
         self.model.fit(X,y)

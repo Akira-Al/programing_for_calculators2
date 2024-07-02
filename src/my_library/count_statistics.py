@@ -8,6 +8,9 @@ import my_library.load_dictionary as dictionary_loader
 
 # カタカナの確認
 KATAKANA_PAT = re.compile(r"[\u30A1-\u30FF]+")
+# 辞書の読み込み
+dict1 = dictionary_loader.load_dict1()
+dict2 = dictionary_loader.load_dict2()
 
 def count_and_vectorize(sent):
     """
@@ -23,9 +26,6 @@ def count_and_vectorize(sent):
     num_positive = 0
     num_negative = 0
     num_neutral = 0
-    # 辞書の読み込み
-    dict1 = dictionary_loader.load_dict1()
-    dict2 = dictionary_loader.load_dict2()
     # 1文を形態素解析してwordsリストに格納
     # token.base_formの型らしい
     words = []
@@ -71,6 +71,7 @@ def count_and_vectorize(sent):
             num_neutral += 1
     num_total = len(polarity)
     
+    print(" ".join(words), [num_positive, num_negative, num_neutral, num_total])
     return [num_positive, num_negative, num_neutral, num_total]
 
 # predict_polarity.pyから持ってきた
