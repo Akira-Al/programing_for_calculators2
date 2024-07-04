@@ -3,6 +3,7 @@ matplotlib
 pandas
 scikit-learn
 scipy
+seaborn
 ipykernel
 tqdm
 
