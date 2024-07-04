@@ -3,21 +3,15 @@ matplotlib
 pandas
 scikit-learn
 scipy
-jupyterlab
-ipython
-pyarrow
+ipykernel
 tqdm
 
 janome
-ginza
-ja_ginza
-nagisa # Windowsだと上手く行かないかも。WSL推奨
+gensim
 
 # development
 flake8
 black
 flake8-bugbear
 
---index-url https://download.pytorch.org/whl/cpu
 torch
-torchtext
