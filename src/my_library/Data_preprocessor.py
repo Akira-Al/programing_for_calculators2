@@ -38,10 +38,16 @@ class DataPreprocessor:
             print(sentence)
             count_vector = counter.count_and_vectorize(sentence)
             X_list.append(count_vector)
-            if self.sentence_arrays[i][4] == "0":  # Writer_Joyの列が"0"なら負例とする 
+            if self.sentence_arrays[i][48] == "-2":  # Avg. Readers_Sentimentの列"-2" 
+                y_list.append(-2)
+            elif self.sentence_arrays[i][48] == "-1":                             
                 y_list.append(-1)
-            else:                                  # Writer_Joyの列が"0"でないなら正例とする 
-                y_list.append(1)
+            elif self.sentence_arrays[i][48] == "1":
+                y_list.append(1)  
+            elif self.sentence_arrays[i][48] == "2":  
+                y_list.append(2)
+            else:
+                y_list.append(0)
             if len(X_list) < 4:
                 print(X_list[-1], y_list[-1])
         self.X, self.y = np.array(X_list), np.array(y_list)  # リストをnumpyの多次元配列に変換

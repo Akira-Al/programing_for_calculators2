@@ -45,6 +45,6 @@ class Validator:
         print("evaluate_model")
         y_pred = self.model.predict(self.X)
         accuracy = metrics.accuracy_score(self.y, y_pred)
-        precision = metrics.precision_score(self.y, y_pred)
-        recall = metrics.recall_score(self.y, y_pred)
+        precision = metrics.precision_score(self.y, y_pred, average='macro')
+        recall = metrics.recall_score(self.y, y_pred, average='macro')
         return accuracy, precision, recall

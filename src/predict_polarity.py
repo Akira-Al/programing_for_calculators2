@@ -17,6 +17,13 @@ print(preprocessed_data[1:10])
 sentence_array = input_loader.load_raw_data(data_path)
 sentence_ans_array = input_loader.load_raw_ans_data(data_ans_path)
 predictions = predictor.predict(preprocessed_data)
+for i in range(len(predictions)):
+    if predictions[i] >= 1:
+        predictions[i] = 1
+    elif predictions[i] <= -1:
+        predictions[i] = -1
+    else:
+        predictions[i] = 0
 # result = [不正解数, 正解数]
 result = [0, 0]
 for i in range(len(predictions)):
