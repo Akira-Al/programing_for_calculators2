@@ -56,13 +56,11 @@ def count_and_vectorize(sent):
         elif words[i] in dict2:
             for record in dict2[words[i]]:
                 partial = False
-                print("words[i],record[0]", words[i], record[0])
                 if [words[i]] == record[0]:
                     # full
                     polarity[i] = record[1]
                 # もし2語以上の辞書に一致するなら
                 elif len([words[i]]) <= len(record[0]):
-                    print("pending.append(", words[i], ")")
                     # partial
                     pending.append([words[i]])
                     break  # ひらがな確認が1語にしか対応してない
@@ -79,7 +77,6 @@ def count_and_vectorize(sent):
                                 if [hira_token] == record[0]:
                                     polarity[i] = record[1]
         if len(pending) < i+1:
-            print("pending.append([None])")
             pending.append([None])
 
         # 2語以上の辞書の確認
@@ -89,11 +86,9 @@ def count_and_vectorize(sent):
                 # 今の単語に対しては確認済み
                 break
             if tokens[0] is None:
-                print("Noneなので", tokens, "はスキップ")
                 continue
             pending[j] = tokens + [words[i]]
             tokens = pending[j]
-            print("確認:", tokens)
             if tokens[0] in dict2:
                 # partial True: 一部一致 False: 完全一致or一致なし
                 partial = False
@@ -116,13 +111,9 @@ def count_and_vectorize(sent):
                 else:
                     # none
                     drop_list.append(j)
-        print("drop_list", drop_list)
-        print("pending", pending)
         for j in drop_list:
             pending = pending[:j]+[[None]]+pending[j+1:]
-        print("pending", pending)
 
-    print("polarity", polarity)
 
     # 極性の数をカウント
     for i in range(len(polarity)):
