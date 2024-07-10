@@ -24,9 +24,9 @@ def load_raw_ans_data_list(file_path_list):
             ans_list[i][0] += load_raw_ans_data(file_path)[i][0]
 
     for i in range(len(ans_list)):
-        if ans_list[i][0] > 0:
+        if ans_list[i][0] > 0.33*3:
             ans_list[i][0] = 1
-        elif ans_list[i][0] < 0:
+        elif ans_list[i][0] < -0.33*3:
             ans_list[i][0] = -1
     return ans_list
 
