@@ -2,7 +2,7 @@ numpy
 matplotlib
 pandas
 scikit-learn
-scipy
+scipy < 1.13
 seaborn
 ipykernel
 tqdm
@@ -16,3 +16,4 @@ black
 flake8-bugbear
 
 torch
+tensorboard
